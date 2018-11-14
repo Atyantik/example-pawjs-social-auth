@@ -25,9 +25,13 @@ class Auth extends Component {
     guestOnly: false,
   };
 
-  state = {
-    isTokenValid: true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isTokenValid: true,
+      isMounted: false,
+    };
+  }
 
   componentDidMount() {
     const { cookies, guestOnly } = this.props;
@@ -39,23 +43,35 @@ class Auth extends Component {
       if (provider && provider === 'google') {
         fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${token}`)
           .then(res => handleResponse(res))
+          .then(() => {
+            this.setState({
+              isMounted: true,
+            });
+          })
           .catch(() => {
             isTokenValid = false;
             cookies.remove('provider');
             cookies.remove('token');
             this.setState({
               isTokenValid,
+              isMounted: true,
             });
           });
       } else if (provider && provider === 'fb') {
         fetch(` https://graph.facebook.com/me?access_token=${token}`)
           .then(res => handleResponse(res))
+          .then(() => {
+            this.setState({
+              isMounted: true,
+            });
+          })
           .catch(() => {
             isTokenValid = false;
             cookies.remove('provider');
             cookies.remove('token');
             this.setState({
               isTokenValid,
+              isMounted: true,
             });
           });
       }
@@ -68,21 +84,21 @@ class Auth extends Component {
       guestOnly,
       route,
     } = this.props;
-    const { isTokenValid } = this.state;
+    const { isTokenValid, isMounted } = this.state;
     const isUserValid = isTokenValid && cookies.get('provider') && cookies.get('token');
-    if (!isUserValid && guestOnly) {
-      return renderRoutes(route.routes);
+    if (isMounted) {
+      if (!isUserValid && guestOnly) {
+        return renderRoutes(route.routes);
+      }
+      if (isUserValid && !guestOnly) {
+        return renderRoutes(route.routes);
+      }
+      if (isUserValid && guestOnly) {
+        return <Redirect to="/user/dashboard" />;
+      }
+      return <Redirect to="/login" />;
     }
-
-    if (isUserValid && !guestOnly) {
-      return renderRoutes(route.routes);
-    }
-
-    if (isUserValid && guestOnly) {
-      return <Redirect to="/user/dashboard" />;
-    }
-
-    return <Redirect to="/login" />;
+    return null;
   }
 }
 export default withCookies(Auth);

@@ -1,0 +1,132 @@
+html, body {
+  background: #EFF3F4;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hero-body {
+  .container {
+    max-width: 700px;
+  }
+  .title {
+    color: hsl(192, 17%, 99%) !important;
+  }
+  .subtitle {
+    color: hsl(192, 17%, 99%) !important;
+    padding-top: 2rem;
+    line-height: 1.5;
+  }
+}
+.loader-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.skeleton-loader {
+  @include loader();
+  border-color: $info;
+  height: 5em;
+  width: 5em;
+  border-width: 5px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+.hero-head .is-info{
+  background-image: linear-gradient(to right, #04a6d7 0%, #209cee 71%, #3287f5 100%);
+  background-color: #209cee;
+}
+
+.hero.is-info.is-bold {
+  background-image: linear-gradient(to right, #04a6d7 0%, #209cee 71%, #3287f5 100%);
+}
+
+.features {
+  padding: 5rem 0;
+}
+
+.box.cta {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+.card-image > .fa {
+  font-size: 8rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: #209cee;
+}
+
+.card-content .content {
+  font-size: 14px;
+  margin: 1rem 1rem;
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.card {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  margin-bottom: 2rem;
+}
+
+.intro {
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.sandbox {
+  padding: 5rem 0;
+}
+
+.tile.notification {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.is-shady {
+  animation: flyintoright .4s backwards;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  transition: all .2s ease-in-out;
+  &:hover {
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.13), 0 6px 6px rgba(0, 0, 0, 0.19);
+  }
+}
+
+/*adds font awesome stars*/
+
+footer li:before {
+  content: '\f1b2';
+  font-family: 'FontAwesome';
+  float: left;
+  margin-left: -1.5em;
+  color: #147efb;
+}
+
+@media (max-width: 1087px) {
+  .navbar-menu {
+    &.is-active {
+      display: block;
+      background-color: #209cee;
+      background-image: linear-gradient(to right, #04a6d7 0%, #209cee 71%, #3287f5 100%);
+      .header-links {
+        width: 100%;
+        display: block;
+        li {
+          a {
+            border: 0;
+          }
+        }
+      }
+    }
+  }
+
+}

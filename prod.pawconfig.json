@@ -1,0 +1,9 @@
+{
+  "port": "9009",
+  "host": "0.0.0.0",
+  "appRootUrl": "/examples/social-auth",
+  "serviceWorker": false,
+  "asyncCSS": false,
+  "serverSideRender": true,
+  "singlePageApplication": false
+}

@@ -10,11 +10,22 @@ class Logout extends Component {
 
   constructor(props) {
     super(props);
-    props.cookies.remove('token');
-    props.cookies.remove('provider');
+    this.removeCookies();
+  }
+
+  removeCookies() {
+    const { cookies } = this.props;
+    cookies.remove('token');
+    cookies.remove('provider');
+    // eslint-disable-next-line
+    console.log("here");
   }
 
   render() {
+    const { staticContext } = this.props;
+    if (staticContext) {
+      staticContext.status = 302;
+    }
     return <Redirect to="/" />;
   }
 }

@@ -25,7 +25,6 @@ class Login extends Component {
 
 
   doLogin(res, provider) {
-    console.log(res);
     const { cookies, history } = this.props;
     if (provider === 'google') {
       cookies.set('token', res.accessToken, {
@@ -82,7 +81,6 @@ class Login extends Component {
                     </GoogleLogin>
                     <FacebookLogin
                       appId="136557516937157"
-                      autoLoad
                       fields="name,email,picture"
                       // onClick={componentClicked}
                       callback={res => this.doLogin(res, 'fb')}

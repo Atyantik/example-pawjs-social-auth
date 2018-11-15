@@ -4,6 +4,7 @@ import { renderRoutes } from 'react-router-config';
 import { withCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
 import fetch from 'universal-fetch';
+import LoaderPage from '../loader-page';
 
 function handleResponse(response) {
   return response.text().then((text) => {
@@ -98,7 +99,7 @@ class Auth extends Component {
       }
       return <Redirect to="/login" />;
     }
-    return null;
+    return <LoaderPage />;
   }
 }
 export default withCookies(Auth);
